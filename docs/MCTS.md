@@ -27,15 +27,19 @@ def getValue(self, factor):
     self.U = (factor * self.P *np.sqrt(self.father.N_visits) / (1 + self.N_visits))
     return self.Q + self.U
 ```
-$$f_{select}(x) = \textbf{max}(Q_i+U_i),i=leaf_{each-one}$$
-$$Q_{new}=Q_{old}+\frac{Value_{leaf}-Q_{old}}{N_{visit}}$$
-$$U=a·P·\frac{[(hisFather's)N_{visit}]^{1/2}}{N_{visit}+1}$$
+![](http://latex.codecogs.com/svg.latex?f_{select}(x)=\\textbf{max}(Q_i+U_i),i=leaf_{each-one})     
+![](http://latex.codecogs.com/svg.latex?Q_{new}=Q_{old}+\\frac{Value_{leaf}-Q_{old}}{N_{visit}})        
+![](http://latex.codecogs.com/svg.latex?U=a*P*\\frac{[(hisFather's)N_{visit}]^{1/2}}{N_{visit}+1})      
 
-其中 $Q$ 是该节点的估计价值，$Value_{leaf}$ 是神经网络预测的第 $1$ 个值，也就是落子此处未来的收益有多大，$N_{visit}$ 是该节点的访问次数，$P$ 是此节点的落子概率（神经网络预测的第 $2$ 个值），$U$ 是平衡因子，$a$ 就是代码中的 `factor` 变量，是一个从 $0$ 到正无穷的调节因子。
+<!-- $$f_{select}(x) = \textbf{max}(Q_i+U_i),i=leaf_{each-one}$$
+$$Q_{new}=Q_{old}+\frac{Value_{leaf}-Q_{old}}{N_{visit}}$$
+$$U=a·P·\frac{[(hisFather's)N_{visit}]^{1/2}}{N_{visit}+1}$$ -->
+
+其中 ![](http://latex.codecogs.com/svg.latex?Q) 是该节点的估计价值，![](http://latex.codecogs.com/svg.latex?Value_{leaf}) 是神经网络预测的第 ![](http://latex.codecogs.com/svg.latex?1) 个值，也就是落子此处未来的收益有多大，![](http://latex.codecogs.com/svg.latex?N_{visit}) 是该节点的访问次数，![](http://latex.codecogs.com/svg.latex?P) 是此节点的落子概率（神经网络预测的第 ![](http://latex.codecogs.com/svg.latex?2) 个值），![](http://latex.codecogs.com/svg.latex?U) 是平衡因子，![](http://latex.codecogs.com/svg.latex?a) 就是代码中的 `factor` 变量，是一个从 ![](http://latex.codecogs.com/svg.latex?0) 到正无穷的调节因子。
 
 $U$ 跟访问次数有关，没有被访问过的节点会被优先考虑，也是增强了探索广度。
 
-- 如果 `factor` 越小，MCTS 搜索中的探索广度就越低，对神经网络预测的先验概率 $P$ 的关注就越少。如果 `factor` 太大，探索广度就太高了，它太依赖于神经网络预测的先验概率 $P$，它不太重视 MCTS 模拟积累得到的结果。因此，需要一个合理折中的 factor 值。
+- 如果 `factor` 越小，MCTS 搜索中的探索广度就越低，对神经网络预测的先验概率 ![](http://latex.codecogs.com/svg.latex?P) 的关注就越少。如果 `factor` 太大，探索广度就太高了，它太依赖于神经网络预测的先验概率 ![](http://latex.codecogs.com/svg.latex?P)，它不太重视 MCTS 模拟积累得到的结果。因此，需要一个合理折中的 factor 值。
 
 ### 扩展
 如果当前节点是叶子节点（无子），则根据当前节点的所有可能的《动作》添加一个或多个子节点。扩展节点需要提供两个值：`action`，`prob`
@@ -58,7 +62,7 @@ def expand(self, action_priors):
 这里我们使用残差网络进行预测。因为神经网络可以积累学习到的知识。
 
 ### 更新
-$Value_{leaf}$ 是神经网络预测的价值收益。将叶子节点的 $Value_{leaf}$，沿着路径自下而上的向上传播，更新沿途每个节点的估值信息。
+![](http://latex.codecogs.com/svg.latex?Value_{leaf}) 是神经网络预测的价值收益。将叶子节点的 ![](http://latex.codecogs.com/svg.latex?Value_{leaf})，沿着路径自下而上的向上传播，更新沿途每个节点的估值信息。
 ```
 TreeNode.py
 
