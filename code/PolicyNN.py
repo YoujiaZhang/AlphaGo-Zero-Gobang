@@ -10,18 +10,19 @@ import random
 import numpy as np
 import pickle
 
+from tqdm import tqdm
+from tkinter import *
 
 # 用以搭建通用得到残差网络结构
 class ResidualCNN():
     L2 = 1e-4  # L2正则化系数
-    def __init__(self, input_dim, output_dim, hidden_layers = {"filters":32, "kernel_size":(3, 3)}, num_layers = 2):
-        self.input_dim = input_dim  # 模型输入尺寸
-        self.output_dim = output_dim # 模型输出尺寸
-        self.hidden_layers = hidden_layers # 隐藏层层数
-        self.num_layers = num_layers # 残差网络层数
+    def __init__(self, input_dim, output_dim, hidden_layers = {"filters":32, "kernel_size":(3, 3)}, num_layers = 5):
+        self.input_dim = input_dim              # 模型输入尺寸
+        self.output_dim = output_dim            # 模型输出尺寸
+        self.hidden_layers = hidden_layers      # 隐藏层层数
+        self.num_layers = num_layers            # 残差网络层数
         self.filters = hidden_layers["filters"]
         self.kernel_size = hidden_layers["kernel_size"]
-
         self.model = self.BuildModel()  # 搭建模型
     
     # 卷积层模板
@@ -82,7 +83,7 @@ class ResidualCNN():
         flatten = Flatten()(conv)
 
         dense = Dense(
-            20, # 输出空间维度
+            32, # 输出空间维度
             use_bias=False, 
             activation='linear', 
             kernel_regularizer=l2(self.L2)
@@ -154,7 +155,7 @@ class PolicyValueNet(ResidualCNN):
     """
     trainDataPoolSize = 18000*2 # 用以存储训练网络的数据
     trainBatchSize = 1024*2     # 每次从数据池(trainDataPool)中随机采样出的一批训练数据
-    epochs = 5                  # 每次训练步数
+    epochs = 10                 # 每次训练步数
     
     trainDataPool = deque(maxlen=trainDataPoolSize) # 训练数据池
     
@@ -197,7 +198,7 @@ class PolicyValueNet(ResidualCNN):
         self.model.fit(oneBatchBoard, [oneBatchProbs, oneBatchWinner], batch_size=len(batchBoard), verbose=0)
         return loss[0]
     
-    def update(self):
+    def update(self, scrollText):
         """
         更新预测网络的参数
         """
@@ -214,7 +215,13 @@ class PolicyValueNet(ResidualCNN):
         # 也就是首先记录下当前模型的预测水平
         batchProbsOld, batchValueOld = self.model.predict_on_batch(np.array(batchBoard))
 
-        for epoch in range(self.epochs):
+        pbar = tqdm(range(self.epochs),ncols=45)
+        for epoch in pbar:
+            scrollText.delete(1.0, END)
+            scrollText.insert(END, '正在训练NN\n'+str(pbar)+'\n')
+            scrollText.see(END)
+            scrollText.update()
+
             # 根据这批训练数据，对模型进行训练
             loss = self.train(batchBoard, batchProbs, batchWinner, self.learningRate*self.LRfctor)
 
@@ -225,14 +232,18 @@ class PolicyValueNet(ResidualCNN):
             kl = np.mean(np.sum(batchProbsOld * (np.log(batchProbsOld + 1e-10) - np.log(batchProbsNew + 1e-10)),axis=1))
             if kl > self.kl_targ * 4:  # 如果KL散度严重发散，则提前停止使用
                 break
-        
+
+        scrollText.delete(1.0, END)
+        scrollText.insert(END, '正在训练NN\n'+str(pbar)+'\n')
+        scrollText.see(END)
+        scrollText.update()
         # 更新学习率
         if kl > self.kl_targ * 2 and self.LRfctor > 0.1:
             self.LRfctor /= 1.5
         elif kl < self.kl_targ / 2 and self.LRfctor < 10:
             self.LRfctor *= 1.5
         
-        print(("kl:{:.5f}," "LRfctor:{:.3f}," "loss:{}," ).format(kl, self.LRfctor, loss))
+        # print(("kl:{:.5f}," "LRfctor:{:.3f}," "loss:{}," ).format(kl, self.LRfctor, loss))
         return loss
 
     def memory(self, play_data):
@@ -252,7 +263,7 @@ class PolicyValueNet(ResidualCNN):
         """ 
         NNParams = pickle.load(open(model_file, 'rb')) # 读取模型
         self.model.set_weights(NNParams)               # 设置模型参数
-        print("正在加载模型: " + model_file)
+        # print("正在加载模型: " + model_file)
 
 
     def save_model(self, model_file):
@@ -262,7 +273,7 @@ class PolicyValueNet(ResidualCNN):
         """
         NNParams = self.model.get_weights() # 获取模型参数
         pickle.dump(NNParams, open(model_file, 'wb'), protocol=2) # 保存
-        print("保存模型到文件: " + model_file)
+        # print("保存模型到文件: " + model_file)
 
 
     def get_DataAugmentation(self, play_data):
