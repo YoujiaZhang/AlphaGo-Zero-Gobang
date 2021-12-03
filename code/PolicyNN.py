@@ -16,7 +16,7 @@ from tkinter import *
 # 用以搭建通用得到残差网络结构
 class ResidualCNN():
     L2 = 1e-4  # L2正则化系数
-    def __init__(self, input_dim, output_dim, hidden_layers = {"filters":32, "kernel_size":(3, 3)}, num_layers = 5):
+    def __init__(self, input_dim, output_dim, hidden_layers = {"filters":36, "kernel_size":(3, 3)}, num_layers = 5):
         self.input_dim = input_dim              # 模型输入尺寸
         self.output_dim = output_dim            # 模型输出尺寸
         self.hidden_layers = hidden_layers      # 隐藏层层数
@@ -215,7 +215,7 @@ class PolicyValueNet(ResidualCNN):
         # 也就是首先记录下当前模型的预测水平
         batchProbsOld, batchValueOld = self.model.predict_on_batch(np.array(batchBoard))
 
-        pbar = tqdm(range(self.epochs),ncols=45)
+        pbar = tqdm(range(self.epochs),ncols=35)
         for epoch in pbar:
             scrollText.delete(1.0, END)
             scrollText.insert(END, '正在训练NN\n'+str(pbar)+'\n')
@@ -234,9 +234,11 @@ class PolicyValueNet(ResidualCNN):
                 break
 
         scrollText.delete(1.0, END)
-        scrollText.insert(END, '正在训练NN\n'+str(pbar)+'\n')
+        scrollText.insert(END, '正在训练NN\n'+str(pbar)+'\n训练结束\n')
         scrollText.see(END)
         scrollText.update()
+
+
         # 更新学习率
         if kl > self.kl_targ * 2 and self.LRfctor > 0.1:
             self.LRfctor /= 1.5

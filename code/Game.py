@@ -1,8 +1,7 @@
-# import matplotlib.pyplot as plt
 import numpy as np
-# from matplotlib.pyplot import MultipleLocator, fill
 from Board import *
 from tkinter import END
+from PIL import Image, ImageGrab
 
 class Game():
     """
@@ -24,37 +23,6 @@ class Game():
         self.scrollText = scrollText
         self.rect = None
 
-        # boardCanvas = plt.figure(self.gameName,figsize=(6,6))
-        # plt.ion()   # 设置画布可以交互
-        # self.ax = plt.subplot(111)
-        # self.canvas = boardCanvas.canvas
-        # buttenPressE = boardCanvas.canvas.mpl_connect('button_press_event', self.ButtoOnclick)
-        # self.resetBoard()
-
-    # def ButtoOnclick(self, event):
-    #     # 鼠标点击的坐标位置
-    #     x, y = event.xdata, event.ydata
-    #     try:
-    #         x = int(np.round(x))
-    #         y = int(np.round(y))
-    #     except TypeError:
-    #         print("无效区域")
-    #     else:
-    #         self.move_human = x*self.boardWidth + y
-    #         self.flag_human_click = True
-
-    # def resetBoard(self):
-    #     """
-    #     重置棋盘
-    #     """
-    #     plt.cla() # 清除当前图形中的当前活动轴
-    #     plt.title(self.gameName) # 设置画布的标题
-    #     plt.grid(linestyle='-')   # 背景的网格线
-    #     plt.axis([-self.margin, self.board.width - self.margin, - self.margin, self.board.height - self.margin])
-    #     x_major_locator=MultipleLocator(1)
-    #     y_major_locator=MultipleLocator(1)
-    #     self.ax.xaxis.set_major_locator(x_major_locator)
-    #     self.ax.yaxis.set_major_locator(y_major_locator)
 
     def Show(self, board, KEY=False):
         """
@@ -120,7 +88,7 @@ class Game():
         return r, c
 
 
-    def selfPlay(self, player):
+    def selfPlay(self, player, Index=0):
         """ 
         构建一个AI自我博弈，重用搜索树，并存储自玩数据：(棋盘状态, 落子概率, 胜者预测) 以供训练
         """
@@ -168,9 +136,8 @@ class Game():
                         self.drawText("Game end. Winner is :"+str(playerName))
                     else:
                         self.drawText("Game end. Tie")
-                
-                # 清空棋盘画布
-                # self.resetBoard()
+                        
+                self.rect = None
                 return winner, zip(boards, probs, winners_z)
 
 
@@ -227,3 +194,4 @@ class Game():
                         self.drawText("Game end. Tie")
                 # self.resetBoard()
                 break
+        self.rect = None

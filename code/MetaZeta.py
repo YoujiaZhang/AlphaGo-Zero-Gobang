@@ -3,15 +3,16 @@ from Game import *
 from AIplayer import *
 from PolicyNN import * 
 
-import time
+
 import os
 from tensorflow.keras.utils import plot_model
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
-from tkinter import *
-from tkinter import scrolledtext
 import tkinter as tk
 import threading
+from tkinter import *
+from tkinter import scrolledtext
+
 
 class MetaZeta(threading.Thread):
     save_ParaFreq = 200 # 每过200盘自我对弈，就更新决策网络模型
@@ -37,9 +38,10 @@ class MetaZeta(threading.Thread):
         self.rb_default2 = Radiobutton(self.window, text='与 AI 对战', value=2,  variable=self.iv_default)
         self.rb_default1.place(x=595, y=15)
         self.rb_default2.place(x=695, y=15)
+        self.iv_default.set(2)
 
         self.canvas = tk.Canvas( self.window, bg='#CD853F', height=435, width=435)
-        self.scrollText = scrolledtext.ScrolledText(self.window, width=35, height=24)
+        self.scrollText = scrolledtext.ScrolledText(self.window, width=38, height=24)
 
         # 构建棋盘
         self.game = Game(Canvas=self.canvas, scrollText=self.scrollText, flag_is_shown=self.flag_is_shown, flag_is_train=self.flag_is_train)
@@ -58,7 +60,7 @@ class MetaZeta(threading.Thread):
 
         self.DrawCanvas((30, 30))
         self.DrawText((480, 50))
-        self.DrawRowsCols((40, 470), (10, 35))
+        self.DrawRowsCols((42, 470), (10, 35))
 
         self.window.mainloop()
 
@@ -120,7 +122,7 @@ class MetaZeta(threading.Thread):
             if self.flag_is_train:
                 # MCTS 进行自我对弈
                 self.drawScrollText('正在 第'+str(oneGame+1)+'轮 自我对弈···')
-                winner, play_data = self.game.selfPlay(self.MCTSPlayer,)
+                winner, play_data = self.game.selfPlay(self.MCTSPlayer,Index=oneGame+1)
 
                 # 为神经网络存储 训练数据
                 self.NN.memory(play_data)
@@ -129,32 +131,23 @@ class MetaZeta(threading.Thread):
                 if len(self.NN.trainDataPool) > self.NN.trainBatchSize:
                     loss = self.NN.update(scrollText=self.scrollText)
                     Loss.append(loss)
-
                 else:
                     self.drawScrollText("收集训练数据: %d%%" % (len(self.NN.trainDataPool)/self.NN.trainBatchSize*100))
 
                 # 每过一定迭代次数保存模型
                 if (oneGame+1) % self.save_ParaFreq == 0:
-                    self.NN.save_model('policy.model')
+                    self.NN.save_model('models/'+str(oneGame+1)+'policy.model')
                     self.drawScrollText("保存模型")
                 
                 self.canvas.delete("all")
                 self.DrawCanvas((30, 30))
             else:
                 self.game.playWithHuman(self.MCTSPlayer,)
+                return
             
             # 重置画布
             # end = time.time()
             # print("循环运行时间:%.2f秒"%(end-start))
 
 if __name__ == '__main__':
-    
-    # if(len(sys.argv) == 2 and sys.argv[1] == "1"):
-    #     flag_is_shown = False; flag_is_train = True
-    # else:
-    #     flag_is_shown = True; flag_is_train = False
-    
-    # tqdm(range(2,28-2),ncols=45)
-
     metaZeta = MetaZeta()
-    # metaZeta

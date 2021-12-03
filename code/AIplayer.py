@@ -5,7 +5,7 @@ class MCTSPlayer():
     基于MCTS的AI棋手
     """
     def __init__(self, policy_NN):
-        self.simulations = 200  # 每次行动的模拟《simulation》数
+        self.simulations = 400  # 每次行动的模拟《simulation》数
         self.factor = 5         # factor 是一个从0到正无穷的调节因子 较高的值意味着更多地依赖于先验概率
 
         # MCTS：就是AI棋手的《决策思维》
