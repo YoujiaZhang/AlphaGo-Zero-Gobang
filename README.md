@@ -2,7 +2,7 @@
 这是一个基于强化学习的自我对弈模型，运行之后的程序如下图所示。
 
 <div align=center>
-<img src="images/MetaZeta.png" width = "551" height = "357" align=center/>
+<img src="images/show-how.gif" width = "551" height = "357" align=center/>
 </div>
 
 ## 运行代码
