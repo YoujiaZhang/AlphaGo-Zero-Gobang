@@ -1,7 +1,6 @@
 import numpy as np
 from Board import *
 from tkinter import END
-from PIL import Image, ImageGrab
 
 class Game():
     """
@@ -133,10 +132,10 @@ class Game():
                                 playerName = 'AI'
                         else:
                             playerName = 'AI-'+str(self.board.current_player)
-                        self.drawText("Game end. Winner is :"+str(playerName))
+                        self.drawText("Game end. Winner is : "+str(playerName))
                     else:
                         self.drawText("Game end. Tie")
-                        
+
                 self.rect = None
                 return winner, zip(boards, probs, winners_z)
 
@@ -189,7 +188,7 @@ class Game():
                                 playerName = 'AI'
                         else:
                             playerName = 'AI-'+str(self.board.current_player)
-                        self.drawText("Game end. Winner is :"+str(playerName))
+                        self.drawText("Game end. Winner is : "+str(playerName))
                     else:
                         self.drawText("Game end. Tie")
                 # self.resetBoard()
