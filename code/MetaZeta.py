@@ -3,16 +3,15 @@ from Game import *
 from AIplayer import *
 from PolicyNN import * 
 
-
+import time
 import os
 from tensorflow.keras.utils import plot_model
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
-import tkinter as tk
-import threading
 from tkinter import *
 from tkinter import scrolledtext
-
+import tkinter as tk
+import threading
 
 class MetaZeta(threading.Thread):
     save_ParaFreq = 200 # 每过200盘自我对弈，就更新决策网络模型
@@ -60,7 +59,7 @@ class MetaZeta(threading.Thread):
 
         self.DrawCanvas((30, 30))
         self.DrawText((480, 50))
-        self.DrawRowsCols((42, 470), (10, 35))
+        self.DrawRowsCols((40, 470), (10, 35))
 
         self.window.mainloop()
 
@@ -131,23 +130,32 @@ class MetaZeta(threading.Thread):
                 if len(self.NN.trainDataPool) > self.NN.trainBatchSize:
                     loss = self.NN.update(scrollText=self.scrollText)
                     Loss.append(loss)
+
                 else:
                     self.drawScrollText("收集训练数据: %d%%" % (len(self.NN.trainDataPool)/self.NN.trainBatchSize*100))
 
                 # 每过一定迭代次数保存模型
                 if (oneGame+1) % self.save_ParaFreq == 0:
-                    self.NN.save_model('models/'+str(oneGame+1)+'policy.model')
+                    self.NN.save_model('policy.model')
                     self.drawScrollText("保存模型")
                 
                 self.canvas.delete("all")
                 self.DrawCanvas((30, 30))
             else:
                 self.game.playWithHuman(self.MCTSPlayer,)
-                return
             
             # 重置画布
             # end = time.time()
             # print("循环运行时间:%.2f秒"%(end-start))
 
 if __name__ == '__main__':
+    
+    # if(len(sys.argv) == 2 and sys.argv[1] == "1"):
+    #     flag_is_shown = False; flag_is_train = True
+    # else:
+    #     flag_is_shown = True; flag_is_train = False
+    
+    # tqdm(range(2,28-2),ncols=45)
+
     metaZeta = MetaZeta()
+    # metaZeta
