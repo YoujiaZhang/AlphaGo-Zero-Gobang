@@ -29,7 +29,6 @@ python3 MetaZeta.py
 |`MetaZeta.py`|**Main**|GUI综合各方 All in one| 
 
 ## 原理（附代码解释）
-**持续更新 ···**
 ### 1. [棋盘设计](docs/Board.md)
 ### 2. [残差神经网络](docs/PolicyNN.md)
 ### 3. [MCTS](docs/MCTS.md)
