@@ -5,8 +5,8 @@
 <img src="../images/MCTS.png" align=center/>
 </div>
 
-## 主要步骤
-### 选择
+## 1 主要步骤
+### 1.1 选择
 从根节点(root)出发，递归地调用 **子节点选择策略** 向搜索树的下方延伸，直到访问到一个终止节点或从未访问过的子节点截止。子节点选择策略也被称为树策略（Tree Policy），通常使用表达式（如下）作为选择依据。
 
 ```
@@ -41,7 +41,7 @@ $$U=a·P·\frac{[(hisFather's)N_{visit}]^{1/2}}{N_{visit}+1}$$ -->
 
 - 如果 `factor` 越小，MCTS 搜索中的探索广度就越低，对神经网络预测的先验概率 ![](http://latex.codecogs.com/svg.latex?P) 的关注就越少。如果 `factor` 太大，探索广度就太高了，它太依赖于神经网络预测的先验概率 ![](http://latex.codecogs.com/svg.latex?P)，它不太重视 MCTS 模拟积累得到的结果。因此，需要一个合理折中的 factor 值。
 
-### 扩展
+### 1.2 扩展
 如果当前节点是叶子节点（无子），则根据当前节点的所有可能的《动作》添加一个或多个子节点。    
 扩展节点需要提供两个值：`action`，`prob`
 ```
@@ -58,11 +58,11 @@ def expand(self, action_priors):
 ```
 `action`，`prob` 都是通过神经网络根据当前的棋盘预测出来的结果。
 
-### 模拟
+### 1,3 模拟
 传统的 MCTS 就是通过蒙特卡洛方法随机采样来预测 `action`，`prob`。     
 这里我们使用残差网络进行预测。因为神经网络可以积累学习到的知识。
 
-### 更新
+### 1,4 更新
 ![](http://latex.codecogs.com/svg.latex?Value_{leaf}) 是神经网络预测的价值收益。将叶子节点的 ![](http://latex.codecogs.com/svg.latex?Value_{leaf})，沿着路径自下而上的向上传播，更新沿途每个节点的估值信息。
 ```
 TreeNode.py
@@ -86,10 +86,10 @@ def updateRecursive(self, leaf_value):
     self.update(leaf_value)
 ```
 ---
-## MCTS类
+## 2 MCTS类
 `TreeNode.py` 中已经将 MCTS 的基本动作设计完成，然后设计 `MCTS.py`。**MCTS类主要是为AI做出落子决策。**
 
-### 推演
+### 2.1 推演
 ```
 MCTS.py
 
@@ -142,7 +142,7 @@ def playout(self, state):
 action_probs, leaf_value = self.policy_NN(state) #此处体现了神经网络是如何指导蒙特卡罗搜索的。
 ```
 
-### 落子
+### 2.2 落子
 ```
 MCTS.py
 
@@ -171,7 +171,7 @@ def getMoveProbs(self, state, flag_is_train):
 
 其中 `simulations` 为推演的次数，根据大数定律推演的次数越多，对未来的估计就会越准确（**大数定律**）。但是尽管当推演次数足够多时，该算法会收敛，但收敛速度不佳。当推演结束之后，就可以获取根节点（root）所有孩子中得分最高的那个地方行动（落子）。
 
-### 继承&更新 root
+### 2.3 继承&更新 root
 ```
 def updateMCTS(self, move):
     if move in self.root.children:
@@ -186,9 +186,9 @@ def updateMCTS(self, move):
 - 在于AI对战过程中，AI每走一步就根据当前棋盘建立一棵树，树高为2（root + children），选择一处进行落子，并使 MCTS 才会初始化。
 
 ---
-## AI player
+## 3 AI player
 封装一个完整的AI玩家 主要的动作就一个《落子》
-### 落子
+### 3.1 落子
 ```
 def getAction(self, board, flag_is_train):
     # 获得当前棋盘中可以落子的地方
