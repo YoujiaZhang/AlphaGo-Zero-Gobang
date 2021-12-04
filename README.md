@@ -30,8 +30,8 @@ python3 MetaZeta.py
 
 ## 原理（附代码解释）
 **持续更新 ···**
-### 1. 棋盘设计
-### 2. 残差神经网络
+### 1. [棋盘设计](docs/Board.md)
+### 2. [残差神经网络](docs/PolicyNN.md)
 ### 3. [MCTS](docs/MCTS.md)
-### 4. 强化学习
+### 4. [强化学习](docs/RL.md)
 
