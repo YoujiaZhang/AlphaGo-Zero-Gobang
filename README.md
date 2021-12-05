@@ -5,6 +5,7 @@
 <img src="images/show-how.gif" width = "551" height = "357" align=center/>
 </div>
 
+---
 ## 运行代码
 ```
 python3 MetaZeta.py
@@ -17,6 +18,7 @@ python3 MetaZeta.py
 我们可以与训练好的AI对弈，测试AI的下棋水平  
 操作：点击右上角单选`与 AI 对战`，点击`开始`。
 
+---
 ## 文件结构
 |文件名|类型|描述|     
 |-|-|-|
@@ -28,9 +30,11 @@ python3 MetaZeta.py
 |`PolicyNN.py`|**NN**|构建残差神经网络| 
 |`MetaZeta.py`|**Main**|GUI综合各方 All in one| 
 
+---
 ## 原理（附代码解释）
 ### 1. [棋盘设计](docs/Board.md)
 ### 2. [残差神经网络](docs/PolicyNN.md)
-### 3. [MCTS](docs/MCTS.md)
-### 4. [强化学习](docs/RL.md)
+[网络结构](images/model.png)
 
+### 3. [MCTS](docs/MCTS.md) 
+### 4. [强化学习](docs/RL.md)      
