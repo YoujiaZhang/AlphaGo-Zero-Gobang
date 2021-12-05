@@ -48,10 +48,6 @@ class MetaZeta(threading.Thread):
         # 构建神经网络
         self.NN = PolicyValueNet((4, self.game.boardWidth, self.game.boardHeight))
 
-        if not self.flag_is_train:
-            self.NN.load_model("models/policy.model")
-            self.drawScrollText("读取模型")
-
         # 构造MCTS玩家，将神经网络辅助MCTS进行决策
         self.MCTSPlayer = MCTSPlayer(policy_NN = self.NN.policy_NN)
         # 输出模型结构
@@ -141,6 +137,9 @@ class MetaZeta(threading.Thread):
                 self.canvas.delete("all")
                 self.DrawCanvas((30, 30))
             else:
+                if not self.flag_is_train:
+                    self.NN.load_model("models/2000policy.model")
+                    self.drawScrollText("读取模型")
                 self.game.playWithHuman(self.MCTSPlayer,)
                 return
             
