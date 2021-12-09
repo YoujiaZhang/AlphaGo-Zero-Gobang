@@ -22,15 +22,15 @@
 ```
 python3 MetaZeta.py
 ```
-#### 1. Train
+### Train
 我们构建了一个基于**MCTS**进行决策的 **AI玩家**，由**残差神经网络**辅助预测落子。
 - 操作：点击 `AI 自我对弈`，在右上角点击 `开始`
 
-#### 2. Test
+### Test
 我们可以和训练有素的 **AI玩家** 对弈，以测试 AI 的下棋水平。
 - 操作：点击 `与 AI对战`，在右上角点击 `开始`
 
-#### 3. Environment
+### Environment
 - Ubuntu 18.04.6 LTS
 - tensorflow-gpu==2.6.2
 
