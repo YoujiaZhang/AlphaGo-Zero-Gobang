@@ -11,7 +11,7 @@
 - Check it out!
 
 ## View a Demo
-This is a self-gaming model based on reinforcement learning, and the program after running is shown below.
+这是一个基于强化学习的自我博弈模型，运行后的程序如下所示。
 
 <div align=center>
 <img src="images/show-how.gif" width = "551" height = "357" align=center/>
@@ -23,12 +23,12 @@ This is a self-gaming model based on reinforcement learning, and the program aft
 python3 MetaZeta.py
 ```
 #### 1. Train
-We construct an AI player based on **MCTS**, where **MCTS** prediction is aided by **residual neural network**.    
-Operation: Click on `AI Self-Play[AI 自我对弈]` in the top right corner and click `Start[开始]`.
+我们构建了一个基于**MCTS**进行决策的 **AI玩家**，由**残差神经网络**辅助预测落子。
+- 操作：点击 `AI 自我对弈`，在右上角点击 `开始`
 
 #### 2. Test
-We can play against the trained AI to test the AI's chess playing level  
-Action: Click `Play against AI[与 AI 对战]` in the upper right corner and click `Start[开始]`.
+我们可以和训练有素的 **AI玩家** 对弈，以测试 AI 的下棋水平。
+- 操作：点击 `与 AI对战`，在右上角点击 `开始`
 
 #### 3. Environment
 - Ubuntu 18.04.6 LTS
@@ -49,15 +49,15 @@ Action: Click `Play against AI[与 AI 对战]` in the upper right corner and cli
 ---
 ## How it works (with code explanation)
 ### 1. [Board design](docs/Board.md)
-First we need to design some rules to describe the information on the board
+首先，我们需要设计一些规则来描述棋盘上的信息
 
 ### 2. [Residual Neural Network](docs/PolicyNN.md)
-Then, we need to build a residual neural network ([Network structure](images/model.png))
+然后，我们需要建立一个残差神经网络 ([Network structure](images/model.png))
 
 ### 3. [MCTS](docs/MCTS.md) 
-Then, we need to understand how AI makes decisions. How he accumulates the learned knowledge of playing chess
+然后，我们需要了解 AI 是如何做出决策的。他是如何积累下棋的知识，并利用学到的知识进行下棋的
 
 ### 4. [Reinforcement Learning](docs/RL.md)      
-Finally we need to know the whole process of reinforcement learning (i.e. self-gaming)
+最后，我们需要了解强化学习的整个过程（即自我对弈 ）
 
 
