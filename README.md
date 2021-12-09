@@ -31,8 +31,8 @@ We can play against the trained AI to test the AI's chess playing level
 Action: Click `Play against AI[与 AI 对战]` in the upper right corner and click `Start[开始]`.
 
 #### 3. Environment
-Ubuntu 18.04.6 LTS
-tensorflow-gpu==2.6.2
+- Ubuntu 18.04.6 LTS
+- tensorflow-gpu==2.6.2
 
 ---
 ## File Structure
