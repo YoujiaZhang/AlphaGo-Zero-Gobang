@@ -42,12 +42,12 @@ tensorflow-gpu==2.6.2
 |`MCTS.py`|**MCTS**|Build MCTS decision tree|  
 |`AIplayer.py`|**MCTS**|Build an AI based on MCTS+NN|  
 |`Board.py`|**Board**|store board information| 
-|`Game.py`|**Board**|defines the game process for selfPlay and VS-Human|  
-|`PolicyNN.py`|**NNN**|constructs a residual neural network| 
+|`Game.py`|**Board**|defines the game process for selfPlay and play-with-Human|  
+|`PolicyNN.py`|**NN**|constructs a residual neural network| 
 |`MetaZeta.py`|**Main**|GUI synthesis for all parties All in one| 
 
 ---
-## Principle (with code explanation)
+## How it works (with code explanation)
 ### 1. [Board design](docs/Board.md)
 First we need to design some rules to describe the information on the board
 
