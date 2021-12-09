@@ -24,11 +24,11 @@ python3 MetaZeta.py
 ```
 #### 1. Train
 We construct an AI player based on **MCTS**, where **MCTS** prediction is aided by **residual neural network**.    
-Operation: Click on `AI Self-Play` in the top right corner and click `Start`.
+Operation: Click on `AI Self-Play[AI 自我对弈]` in the top right corner and click `Start[开始]`.
 
 #### 2. Test
 We can play against the trained AI to test the AI's chess playing level  
-Action: Click `Play against AI` in the upper right corner and click `Start`.
+Action: Click `Play against AI[与 AI 对战]` in the upper right corner and click `Start[开始]`.
 
 #### 3. Environment
 Ubuntu 18.04.6 LTS
