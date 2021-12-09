@@ -6,9 +6,9 @@
 <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" >
 </p>
 
-Do you like to play **Gobang** ?
-Do you want to know how **AlphGo Zero** works ?
-Check it out!
+- Do you like to play **Gobang** ?
+- Do you want to know how **AlphGo Zero** works ?
+- Check it out!
 
 ## View a Demo
 This is a self-gaming model based on reinforcement learning, and the program after running is shown below.
