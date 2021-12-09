@@ -54,7 +54,7 @@ python3 MetaZeta.py
 ### 2. [Residual Neural Network](docs/PolicyNN.md)
 然后，我们需要建立一个残差神经网络 ([Network structure](images/model.png))
 
-### 3. [MCTS](docs/MCTS.md) 
+### 3. [MCTS](docs/MCTS.md) ✨✨✨
 然后，我们需要了解 AI 是如何做出决策的。他是如何积累下棋的知识，并利用学到的知识进行下棋的
 
 ### 4. [Reinforcement Learning](docs/RL.md)      
