@@ -7,7 +7,7 @@
 </p>
 
 - Do you like to play **Gobang** ?
-- Do you want to know how **AlphGo Zero** works ?
+- Do you want to know how **AlphaGo Zero** works ?
 - Check it out!
 
 ## View a Demo
