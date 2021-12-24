@@ -10,7 +10,7 @@
 - Do you want to know how **AlphaGo Zero** works ?
 - Check it out!
 
-**Illustration can be viewed in my [Blog :)](https://youjiazhang.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/AlphaGoZero/)** 
+**You can also read my [Blog :)](https://youjiazhang.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/AlphaGoZero/)** 
 
 ## View a Demo
 这是一个基于强化学习的自我博弈模型，运行后的程序如下所示。
