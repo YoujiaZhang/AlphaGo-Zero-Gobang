@@ -1,4 +1,4 @@
-<h1 align="center">Meta-Zeta</h1>
+<h1 align="center">AlphaGo-Zero-Gobang</h1>
 
 <p align="center">
 <img src="https://img.shields.io/badge/made%20by-youjiaZhang-blue.svg" >
