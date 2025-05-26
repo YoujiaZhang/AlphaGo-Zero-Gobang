@@ -1,18 +1,14 @@
-<h1 align="center">AlphaGo-Zero-Gobang</h1>
+![image](https://github.com/user-attachments/assets/cdcfb64f-077a-42dd-a258-dcd1f0fdad4c)
 
 <p align="center">
 <img src="https://img.shields.io/badge/made%20by-youjiaZhang-blue.svg" >
-
 <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" >
 </p>
 
-- Do you like to play **Gobang** ?
-- Do you want to know how **AlphaGo Zero** works ?
-- Check it out!
+## ✉️ Contact
+For feedback, questions, or press inquiries please contact [Youjia Zhang](Youjiazhang@hust.edu.cn). 🤩
 
-**You can also read my [Blog :)](https://youjiazhang.github.io/)** 
-
-## View a Demo
+## 📽️ View a Demo
 这是一个基于强化学习的自我博弈模型，运行后的程序如下所示。
 
 <div align=center>
@@ -20,24 +16,24 @@
 </div>
 
 ---
-## Quick Start
+## 🚀 Quick Start
 ```
 python3 MetaZeta.py
 ```
-### Train
+### 🏃 Training
 我们构建了一个基于**MCTS**进行决策的 **AI玩家**，由**残差神经网络**辅助预测落子。
 - 操作：点击 `AI 自我对弈`，在右上角点击 `开始`
 
-### Test
+### ✍️ Test
 我们可以和训练有素的 **AI玩家** 对弈，以测试 AI 的下棋水平。
 - 操作：点击 `与 AI对战`，在右上角点击 `开始`
 
-### Environment
+### ⚙️ Environment
 - Ubuntu 18.04.6 LTS
 - tensorflow-gpu==2.6.2
 
 ---
-## File Structure
+## 🫡 File Structure
 |filename|type|description|     
 |-|-|-|
 |`TreeNode.py`|**MCTS**| nodes of the MCTS decision tree| 
@@ -49,7 +45,7 @@ python3 MetaZeta.py
 |`MetaZeta.py`|**Main**|GUI synthesis for all parties All in one| 
 
 ---
-## How it works (with code explanation)
+## 📦 How it works (with code explanation)
 ### 1. [Board design](docs/Board.md)
 首先，我们需要设计一些规则来描述棋盘上的信息
 
