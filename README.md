@@ -1,4 +1,6 @@
-![image](https://github.com/user-attachments/assets/cdcfb64f-077a-42dd-a258-dcd1f0fdad4c)
+<p align="center">
+  <img src="images/logo.png" width=500>
+</p>
 
 <p align="center">
 <img src="https://img.shields.io/badge/made%20by-youjiaZhang-blue.svg" >
